@@ -1,20 +1,12 @@
 #include "Fractal.h"
 
-/**
- * @brief Gets axiom
- * 
- * @return std::string Axiom as a string.
- */
+/** @copydoc Fractal::getAxiom() */
 std::string Fractal::getAxiom()
 {
     return axiom;
 }
 
-/**
- * @brief Finds each instance of Axiom in string and replaces
- * it with the Rule.
- * 
- */
+/** @copydoc Fractal::searchAndReplace() */
 void Fractal::searchAndReplace()
 {
     std::string next;
