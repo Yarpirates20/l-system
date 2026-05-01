@@ -1,12 +1,13 @@
 #include "StateEngine.h"
 
 /** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
-StateEngine::StateEngine(float xStart, float yStart, float angleStart)
+StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(25), stepSize(50)
 {
+    angleIncrement = degreeToRadians(angleIncrement);
+
     angleStart = degreeToRadians(angleStart);
 
-    currentState = {xStart, yStart, angleStart};  
-    
+    currentState = {xStart, yStart, angleStart};
 }
 
 /** @copydoc StateEngine::pushState() */
@@ -18,17 +19,24 @@ void StateEngine::pushState()
 /** @copydoc StateEngine::popState() */
 void StateEngine::popState()
 {
-    currentState.x = s.top().x;
-    currentState.y = s.top().y;
-    currentState.angle = s.top().angle;
-
-    s.pop();
+    if (!s.empty())
+    {
+        currentState = s.top();
+        s.pop();
+    }
 }
 
 /** @copydoc StateEngine::rotateAngle(char c) */
 void StateEngine::rotateAngle(char c)
 {
-    (void)c;
+    if (c == '+')
+    {
+        currentState.angle += angleIncrement;
+    }
+    else if (c == '-')
+    {
+        currentState.angle -= angleIncrement;
+    }
 }
 
 /** @copydoc StateEngine::process(Fractal f) */
@@ -41,6 +49,14 @@ void StateEngine::process(Fractal f)
         if (rules.find(i) != rules.end())
         {
             stepForward();
+        }
+        else if (i == '+')
+        {
+            currentState.angle += angleIncrement;
+        }
+        else if (i == '-')
+        {
+            currentState.angle -= angleIncrement;
         }
         else if (i == '[')
         {
@@ -56,9 +72,9 @@ void StateEngine::process(Fractal f)
 /** @copydoc StateEngine::stepForward() */
 void StateEngine::stepForward()
 {
-    float nextX = currentState.x + stepSize * cos(degreeToRadians(currentState.angle));
+    float nextX = currentState.x + stepSize * cos(currentState.angle);
 
-    float nextY = currentState.y + stepSize * sin(degreeToRadians(currentState.angle));
+    float nextY = currentState.y + stepSize * sin(currentState.angle);
 
     // Save line from current (start) to next (end)
     lineList.push_back({currentState.x, currentState.y, nextX, nextY});

@@ -33,8 +33,8 @@ class StateEngine
 {
 private:
     std::stack<State> s;
-    const float angle = 25.0;
-    const float stepSize = 50.0;
+    float angleIncrement;
+    float stepSize;
     State currentState;
     std::vector<Line> lineList;
 
