@@ -32,6 +32,14 @@ public:
     std::string getAxiom();
 
     /**
+     * @brief Get the rules.
+     * 
+     * @return std::map<char, std::string> A map containing the 
+     * character as the key and the instructions as the value. 
+     */
+    std::map<char, std::string> getRule();
+
+    /**
      * @brief Replaces each instance of a character with the mapped rule and 
      * updates the axiom.
      * 

@@ -6,6 +6,13 @@ std::string Fractal::getAxiom()
     return axiom;
 }
 
+
+/** @copydoc Fractal::getRule() */
+std::map<char, std::string> Fractal::getRule()
+{
+    return rule;
+}
+
 /** @copydoc Fractal::searchAndReplace() */
 void Fractal::searchAndReplace()
 {

@@ -1,7 +1,81 @@
 #include "StateEngine.h"
 
-/** @copydoc StateEngine::push(State fractalState) */
-void StateEngine::push(State fractalState)
+/** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
+StateEngine::StateEngine(float xStart, float yStart, float angleStart)
 {
-    s.push(fractalState);
+    angleStart = degreeToRadians(angleStart);
+
+    currentState = {xStart, yStart, angleStart};  
+    
+}
+
+/** @copydoc StateEngine::pushState() */
+void StateEngine::pushState()
+{
+    s.push(currentState);
+}
+
+/** @copydoc StateEngine::popState() */
+void StateEngine::popState()
+{
+    currentState.x = s.top().x;
+    currentState.y = s.top().y;
+    currentState.angle = s.top().angle;
+
+    s.pop();
+}
+
+/** @copydoc StateEngine::rotateAngle(char c) */
+void StateEngine::rotateAngle(char c)
+{
+    (void)c;
+}
+
+/** @copydoc StateEngine::process(Fractal f) */
+void StateEngine::process(Fractal f)
+{
+    const auto &rules = f.getRule();
+
+    for (const auto &i : f.getAxiom())
+    {
+        if (rules.find(i) != rules.end())
+        {
+            stepForward();
+        }
+        else if (i == '[')
+        {
+            pushState();
+        }
+        else if (i == ']')
+        {
+            popState();
+        }
+    }
+}
+
+/** @copydoc StateEngine::stepForward() */
+void StateEngine::stepForward()
+{
+    float nextX = currentState.x + stepSize * cos(degreeToRadians(currentState.angle));
+
+    float nextY = currentState.y + stepSize * sin(degreeToRadians(currentState.angle));
+
+    // Save line from current (start) to next (end)
+    lineList.push_back({currentState.x, currentState.y, nextX, nextY});
+
+    // Update current position to new end point
+    currentState.x = nextX;
+    currentState.y = nextY;
+}
+
+/** @copydoc StateEngine::getLines() */
+std::vector<Line> StateEngine::getLines()
+{
+    return lineList;
+}
+
+/** @copydoc StateEngine::degreeToRadians(float degrees) */
+float StateEngine::degreeToRadians(float degrees)
+{
+    return (degrees * M_PI) / 180;
 }

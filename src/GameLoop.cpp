@@ -1,5 +1,6 @@
 #include "GameLoop.h"
 
+
 /** @copydoc GameLoop::GameLoop() */
 GameLoop::GameLoop()
 {
@@ -11,19 +12,36 @@ GameLoop::~GameLoop()
 {
 }
 
-
 /** @copydoc GameLoop::run() */
 void GameLoop::run()
 {
+    Fractal f("F", {{'F', "F[+F][-F]"}});
+
+    // cout << f.getAxiom() << endl;
+
+    for (size_t i = 0; i < 3; ++i)
+    {
+
+        f.searchAndReplace();
+        // cout << f.getAxiom() << endl;
+    }
+
+    // events
     while (window->isOpen())
     {
-        // events here if adding later
+        while (window->isOpen())
+        {
+            while (const std::optional event = window->pollEvent())
+            {
+                if (event->is<sf::Event::Closed>())
+                    window->close();
+            }
+        }
 
         // update
         window->clear();
 
-        //render
+        // render
         window->display();
     }
-    
 }
