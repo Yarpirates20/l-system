@@ -98,23 +98,6 @@ float StateEngine::degreeToRadians(float degrees)
     return (degrees * M_PI) / 180;
 }
 
-/** @copydoc StateEngine::printStack() */
-void StateEngine::printStack()
-{
-    std::stack<State> temp(s);
-
-    while (!temp.empty())
-    {
-        auto i = temp.top();
-        std::cout << "x-coord: " << i.x << "\n";
-        std::cout << "y-coord: " << i.y << "\n";
-        std::cout << "angle: " << i.angle << "\n";
-        std::cout << "------------\n\n";
-
-        temp.pop();
-    }
-}
-
 /** @copydoc StateEngine::spawn() */
 Fractal StateEngine::spawn()
 {
@@ -134,8 +117,12 @@ void StateEngine::printList()
     for (auto &&i : lineList)
     {
         std::cout << "Start: (" << i.x1 << ", " << i.y1 << ")\n";
-        std::cout << "End: (" << i.x2 << ", " << i.y2 << ")\n\n"; 
-
+        std::cout << "End: (" << i.x2 << ", " << i.y2 << ")\n\n";
     }
-    
+}
+
+/** @copydoc StateEngine::getLineList() */
+std::vector<Line> StateEngine::getLineList()
+{
+    return lineList;
 }
