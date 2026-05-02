@@ -24,13 +24,11 @@ void GameLoop::run()
     // events
     while (window->isOpen())
     {
-        while (window->isOpen())
+
+        while (const std::optional event = window->pollEvent())
         {
-            while (const std::optional event = window->pollEvent())
-            {
-                if (event->is<sf::Event::Closed>())
-                    window->close();
-            }
+            if (event->is<sf::Event::Closed>())
+                window->close();
         }
 
         // update
