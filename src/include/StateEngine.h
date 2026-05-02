@@ -38,6 +38,8 @@ private:
     State currentState;
     std::vector<Line> lineList;
 
+    Fractal f;
+
 public:
  
     /**
@@ -74,7 +76,7 @@ public:
      * 
      * @param f 
      */
-    void process(Fractal f);
+    void process();
 
     /**
      * @brief Triggered by Fractal Key char. 
@@ -98,6 +100,25 @@ public:
      * @return float Converted float as radians.
      */
     float degreeToRadians(float degrees);
+
+    /**
+     * @brief Helper function to print States in stack.
+     * 
+     */
+    void printStack();
+
+    /**
+     * @brief Creates the Fractal object and axiom to use.
+     * 
+     * @return Fractal The Fractal to be displayed.
+     */
+    Fractal spawn();
+
+    /**
+     * @brief Prints the list of starting/ending points.
+     * 
+     */
+    void printList();
 };
 
 #endif // STATEENGINE_H

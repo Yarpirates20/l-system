@@ -1,38 +1,36 @@
 #include <SFML/Graphics.hpp>
-#include "Fractal.h"
-
 #include <iostream>
+
+#include "GameLoop.h"
+#include "StateEngine.h"
+#include "Fractal.h"
 
 using std::cout;
 using std::endl;
 
 int main()
 {
-	Fractal f("F", {{'F', "F[+F][-F]"}});
 
-	cout << f.getAxiom() << endl;
+	// GameLoop g;
 
-	for (size_t i = 0; i < 3; ++i)
-	{
+	// g.run();
 
-		f.searchAndReplace();
-		cout << f.getAxiom() << endl;
-	}
+	
+    // Fractal f("F", {{'F', "F[+F][-F]"}});
+	
+    // // cout << f.getAxiom() << endl;
+	
+    // for (size_t i = 0; i < 3; ++i)
+    // {
+		
+	// 	f.searchAndReplace();
+    //     // cout << f.getAxiom() << endl;
+    // }
+	
+    StateEngine engine(360, 200, -90.f);
 
-	/* 	sf::RenderWindow window( sf::VideoMode( { 200, 200 } ), "SFML works!" );
-		sf::CircleShape shape( 100.f );
-		shape.setFillColor( sf::Color::Green );
+	engine.process();
+    engine.printList();
 
-		while ( window.isOpen() )
-		{
-			while ( const std::optional event = window.pollEvent() )
-			{
-				if ( event->is<sf::Event::Closed>() )
-					window.close();
-			}
-
-			window.clear();
-			window.draw( shape );
-			window.display();
-		} */
+	return 0;
 }

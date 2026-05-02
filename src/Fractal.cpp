@@ -24,9 +24,7 @@ void Fractal::searchAndReplace()
 
         if (it != rule.end())
         {
-            next += " ";
             next += it->second;
-            next += " ";
         }
         else
         {

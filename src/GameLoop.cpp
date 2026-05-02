@@ -26,6 +26,10 @@ void GameLoop::run()
         // cout << f.getAxiom() << endl;
     }
 
+    StateEngine engine(window->getSize().x /2, window->getSize().y, -90.f);
+    engine.process();
+    engine.printStack();
+
     // events
     while (window->isOpen())
     {
