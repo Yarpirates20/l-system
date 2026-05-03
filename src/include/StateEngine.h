@@ -40,6 +40,8 @@ private:
 
     Fractal f;
 
+    int currentCharIndex = 0;
+
 public:
     /**
      * @brief Construct a new State Engine object
@@ -76,6 +78,12 @@ public:
      * @param f
      */
     void process();
+
+    /**
+     * @brief Processes the string one step at a time for live-action drawing.
+     *
+     */
+    void update();
 
     /**
      * @brief Triggered by Fractal Key char.
@@ -115,10 +123,10 @@ public:
 
     /**
      * @brief Get the Line List object
-     * 
+     *
      * @return std::vector<Line> A vector of Line structs.
      */
-    std::vector<Line> getLineList();
+    // std::vector<Line> getLineList();
 };
 
 #endif // STATEENGINE_H

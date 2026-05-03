@@ -2,7 +2,7 @@
 #include <iostream>
 
 /** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
-StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(25), stepSize(15), f(spawn())
+StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(120), stepSize(15), f(spawn())
 {
 
     angleIncrement = degreeToRadians(angleIncrement);
@@ -71,6 +71,40 @@ void StateEngine::process()
     }
 }
 
+/** @copydoc StateEngine::update() */
+void StateEngine::update()
+{
+    const auto &rules = f.getRule();
+
+    if (currentCharIndex < f.getAxiom().length())
+    {
+        char k = f.getAxiom()[currentCharIndex];
+        
+        if (rules.find(k) != rules.end())
+        {
+            stepForward();
+        }
+        else if (k == '+')
+        {
+            currentState.angle += angleIncrement;
+        }
+        else if (k == '-')
+        {
+            currentState.angle -= angleIncrement;
+        }
+        else if (k == '[')
+        {
+            pushState();
+        }
+        else if (k == ']')
+        {
+            popState();
+        }
+
+        currentCharIndex++;
+    }
+}
+
 /** @copydoc StateEngine::stepForward() */
 void StateEngine::stepForward()
 {
@@ -101,7 +135,7 @@ float StateEngine::degreeToRadians(float degrees)
 /** @copydoc StateEngine::spawn() */
 Fractal StateEngine::spawn()
 {
-    Fractal frac("-X", {{'X', "F+[[X]-X]-F[-FX]+X"},{'F', "FF"}});
+    Fractal frac("F-G-G", {{'F', "F-G+F+G-F"}, {'G', "GG"}});
 
     for (size_t i = 0; i < 6; ++i)
     {
@@ -121,8 +155,8 @@ void StateEngine::printList()
     }
 }
 
-/** @copydoc StateEngine::getLineList() */
-std::vector<Line> StateEngine::getLineList()
-{
-    return lineList;
-}
+// /** @copydoc StateEngine::getLineList() */
+// std::vector<Line> StateEngine::getLineList()
+// {
+//     return lineList;
+// }

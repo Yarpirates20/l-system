@@ -17,9 +17,9 @@ void GameLoop::run()
 
     StateEngine engine(window->getSize().x / 2, window->getSize().y, -90.f);
 
-    engine.process();
+    // engine.process();
 
-    auto lines = engine.getLineList();
+    // auto lines = engine.getLineList();
 
     // events
     while (window->isOpen())
@@ -32,6 +32,13 @@ void GameLoop::run()
         }
 
         // update
+        for(int i = 0; i < 1; ++i)
+        {
+            engine.update();
+        }
+
+        auto lines = engine.getLines();
+
         window->clear();
 
         // render
