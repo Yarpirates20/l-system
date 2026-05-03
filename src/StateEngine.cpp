@@ -2,7 +2,7 @@
 #include <iostream>
 
 /** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
-StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(25), stepSize(50), f(spawn())
+StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(25), stepSize(15), f(spawn())
 {
 
     angleIncrement = degreeToRadians(angleIncrement);
@@ -101,9 +101,9 @@ float StateEngine::degreeToRadians(float degrees)
 /** @copydoc StateEngine::spawn() */
 Fractal StateEngine::spawn()
 {
-    Fractal frac("F", {{'F', "F[+F][-F]"}});
+    Fractal frac("-X", {{'X', "F+[[X]-X]-F[-FX]+X"},{'F', "FF"}});
 
-    for (size_t i = 0; i < 3; ++i)
+    for (size_t i = 0; i < 6; ++i)
     {
         frac.searchAndReplace();
     }

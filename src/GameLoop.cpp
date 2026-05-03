@@ -3,7 +3,7 @@
 /** @copydoc GameLoop::GameLoop() */
 GameLoop::GameLoop()
 {
-    window = new sf::RenderWindow(sf::VideoMode({640, 480}), "L-System");
+    window = new sf::RenderWindow(sf::VideoMode({1423, 904}), "L-System");
 }
 
 /** @copydoc GameLoop::~GameLoop() */
