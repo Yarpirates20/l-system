@@ -1,6 +1,7 @@
 #ifndef STATEENGINE_H
 #define STATEENGINE_H
 
+#include <SFML/Graphics.hpp>
 #include "Fractal.h"
 
 #include <stack>
@@ -41,6 +42,8 @@ private:
     Fractal f;
 
     int currentCharIndex = 0;
+
+    sf::VertexArray treeVA;
 
 public:
     /**
@@ -122,11 +125,13 @@ public:
     void printList();
 
     /**
-     * @brief Get the Line List object
-     *
-     * @return std::vector<Line> A vector of Line structs.
+     * @brief Get the Vertex Array object
+     * 
+     * @return const sf::VertexArray& The VertexArray holding 
+     * the lines to render.
      */
-    // std::vector<Line> getLineList();
+    const sf::VertexArray& getVertexArray() const;
+
 };
 
 #endif // STATEENGINE_H

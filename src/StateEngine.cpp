@@ -2,7 +2,7 @@
 #include <iostream>
 
 /** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
-StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(120), stepSize(15), f(spawn())
+StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(120), stepSize(15), f(spawn()), treeVA(sf::PrimitiveType::Lines, 2)
 {
 
     angleIncrement = degreeToRadians(angleIncrement);
@@ -112,8 +112,12 @@ void StateEngine::stepForward()
 
     float nextY = currentState.y + stepSize * sin(currentState.angle);
 
-    // Save line from current (start) to next (end)
-    lineList.push_back({currentState.x, currentState.y, nextX, nextY});
+    sf::Vertex start{sf::Vector2f(currentState.x, currentState.y), sf::Color::Cyan};
+
+    sf::Vertex end{sf::Vector2f(nextX, nextY), sf::Color::Cyan};
+
+    treeVA.append(start);
+    treeVA.append(end);
 
     // Update current position to new end point
     currentState.x = nextX;
@@ -155,8 +159,8 @@ void StateEngine::printList()
     }
 }
 
-// /** @copydoc StateEngine::getLineList() */
-// std::vector<Line> StateEngine::getLineList()
-// {
-//     return lineList;
-// }
+/** @copydoc StateEngine::getVertexArray() const */
+const sf::VertexArray &StateEngine::getVertexArray() const
+{
+    return treeVA;
+}
