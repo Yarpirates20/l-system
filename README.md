@@ -13,14 +13,14 @@ This program is the mechanism mentioned above. It is a simulation of the tree or
    - **rules**: (F -> F-G+F+G-F), (G -> GG)
    - **angle**: 120°
 
-IMAGE
+<img width="1136" height="932" alt="Image" src="https://github.com/user-attachments/assets/9a703ecc-60a7-4c20-8253-b5760b3f2729" />
 
 ### Fractal Plant
    - **axiom**: -X
    - **rules**: (X -> F+[[X]-X]-F[-FX]+X), (F -> FF)
    - **angle**: 25°
 
-IMAGE
+<img width="1436" height="935" alt="Image" src="https://github.com/user-attachments/assets/d5e3c323-1613-4050-a2b6-8d98f14cb355" />
 
 This project used the CMake SFML template for the graphics, which made it super simple and easy to work on.
 
