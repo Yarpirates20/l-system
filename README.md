@@ -22,5 +22,6 @@ This program is the mechanism mentioned above. It is a simulation of the tree or
 
 <img width="1436" height="935" alt="Image" src="https://github.com/user-attachments/assets/d5e3c323-1613-4050-a2b6-8d98f14cb355" />
 
-This project used the CMake SFML template for the graphics, which made it super simple and easy to work on.
+
+I used the [CMake SFML Template](https://github.com/SFML/cmake-sfml-project) for the graphics, which made it super simple and easy to work on.
 
