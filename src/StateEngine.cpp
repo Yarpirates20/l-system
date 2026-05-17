@@ -2,7 +2,7 @@
 #include <iostream>
 
 /** @copydoc StateEngine::StateEngine(float xStart, float yStart, float angleStart) */
-StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(120), stepSize(15), f(spawn()), treeVA(sf::PrimitiveType::Lines, 2)
+StateEngine::StateEngine(float xStart, float yStart, float angleStart) : angleIncrement(25), stepSize(15), f(spawn()), treeVA(sf::PrimitiveType::Lines, 2)
 {
 
     angleIncrement = degreeToRadians(angleIncrement);
@@ -136,10 +136,10 @@ float StateEngine::degreeToRadians(float degrees)
     return (degrees * M_PI) / 180;
 }
 
-/** @copydoc StateEngine::spawn() */
+/** @copydoc StateEngine::spawn() */ 
 Fractal StateEngine::spawn()
 {
-    Fractal frac("F-G-G", {{'F', "F-G+F+G-F"}, {'G', "GG"}});
+    Fractal frac("-X", {{'X', "F+[[X]-X]-F[-FX]+X"}, {'F', "FF"}});
 
     for (size_t i = 0; i < 6; ++i)
     {
